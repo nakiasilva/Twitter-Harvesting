@@ -1,0 +1,13 @@
+- hosts: Wordpress
+  vars_files:
+    - host_vars/wordpress.yaml
+  gather_facts: false
+  pre_tasks:
+    - name: 'Install Python2'
+      raw: sudo apt-get update: sudo apt-get -y install python
+  
+  roles:
+    - role: common
+    - role: volume
+    - role: docker
+    - role: wordpress

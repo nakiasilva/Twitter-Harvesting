@@ -1,0 +1,83 @@
+#This file is developed by Team 52 of COMP90024 of The University of Melbourne.
+#Researched cities : All the cities in Melbourne region
+#Team member - id
+#Nitish Mathur  				954892     
+#Yash Shinde     				920691
+#Nakia Silva  					796504
+#Shreyas Walvekar    				961621
+#Krishna Srinivas Sundararajan  		977863
+
+# Configure packages
+- name: upgrade all packages
+  yum: name=* state=latest
+
+- name: Install a list of packages
+  yum:
+    name:
+      - "{{ item }}"
+    state: latest
+    update_cache: yes
+  with_items:
+    - yum-utils
+    - '@Development tools'
+    - https://centos7.iuscommunity.org/ius-release.rpm
+    - python
+    - python36-pip
+    - epel-release
+    - git
+    - jq
+    - docker
+    - docker-compose
+    - device-mapper-persistent-data
+    - lvm2
+    - vim
+  become: yes
+  ignore_errors: yes
+
+- command: " {{ item }}"
+  with_items:
+    - wget https://nodejs.org/dist/v6.0.0/node-v6.0.0-linux-x64.tar.xz -P /mnt/storage/
+    - tar -xf /mnt/storage/node-v6.0.0-linux-x64.tar.xz
+
+- command: "pip3 install {{item}}"
+  with_items:
+    - ijson
+    - Couchdb
+    - tweepy
+
+- name: Configure Docker Setup
+  file:
+     mode: "0777"
+     recurse: yes
+     path:  "/etc/systemd/system/docker.service.d"
+     state: directory
+
+- command: "touch {{ item }}"
+  with_items:
+    - /etc/systemd/system/docker.service.d/http-proxy.conf
+    - /etc/systemd/system/docker.service.d/https-proxy.conf
+
+- name: Enable docker http proxy
+  lineinfile:
+    path: '/etc/systemd/system/docker.service.d/http-proxy.conf'
+    line: "{{ item }}"
+  with_items:
+    - '[Service]'
+    - 'Environment="HTTP_PROXY=http://wwwproxy.unimelb.edu.au:8000"'
+
+- name: Enable docker https proxy
+  lineinfile:
+    path: '/etc/systemd/system/docker.service.d/https-proxy.conf'
+    line: "{{ item }}"
+  with_items:
+    - '[Service]'
+    - 'Environment="HTTP_PROXY=http://wwwproxy.unimelb.edu.au:8000"'
+
+- command: "{{ item }}"
+  with_items:
+    - systemctl daemon-reload
+    - systemctl restart docker
+    - docker pull couchdb:2.3.0
+ 
+
+

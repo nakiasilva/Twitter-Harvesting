@@ -1,0 +1,37 @@
+#This file is developed by Team 52 of COMP90024 of The University of Melbourne.
+#Researched cities : All the cities in Melbourne region
+#Team member - id
+#Nitish Mathur  				954892     
+#Yash Shinde     				920691
+#Nakia Silva  					796504
+#Shreyas Walvekar    				961621
+#Krishna Srinivas Sundararajan  		977863
+
+# Create an instance on Nectar
+- name: Create an instance
+  os_server:
+    name: '{{ item.instance_name }}'
+    image: '{{ item.instance_image }}'
+    key_name: '{{ item.instance_key_name }}'
+    flavor: '{{ item.instance_flavor }}'
+    availability_zone: '{{ availability_zone }}'
+    security_groups: '{{ sg_names }}'
+    volumes: '{{ os_vol_ids }}'
+    auto_floating_ip: yes
+    wait: yes
+    timeout: 600
+    state: present
+  register: os_instance
+  loop: '{{ instances }}'
+
+- name: Set facts for created insatnce
+  set_fact:
+    public_v4: '{{ item.server.public_v4 }}'
+    key_name: '{{ item.server.key_name }}'
+    name: '{{ item.server.name }}'
+    status: '{{ item.server.status }}'
+  loop: '{{ os_instance.results }}'
+  
+- debug:
+    msg: "Instance {{ name }} is Active with ip - {{ public_v4 }}"
+  when: '{{ os_instance.changed }}'

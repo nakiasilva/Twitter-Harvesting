@@ -1,0 +1,35 @@
+#This file is developed by Team 52 of COMP90024 of The University of Melbourne.
+#Researched cities : All the cities in Melbourne region
+#Team member - id
+#Nitish Mathur  				954892     
+#Yash Shinde     				920691
+#Nakia Silva  					796504
+#Shreyas Walvekar    				961621
+#Krishna Srinivas Sundararajan  		977863
+
+
+# Create Mount volume file
+- name: Create Filesystem
+  # Create filesystem
+  filesystem:
+    fstype: "ext4"
+    dev: "/dev/vdb"
+
+- name: Add a directory to mount to
+  file:
+     mode: "0777"
+     recurse: yes
+     path:  "/mnt/storage"
+     state: directory
+
+- name: Mount volume
+  mount:
+    path: "/mnt/storage"
+    src: "/dev/vdb" 
+    fstype: "ext4"
+    opts: "defaults" 
+    state: mounted
+
+- name: Update the UTC time
+  command: 'dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e "s/< Date: //"); sudo date +"%d%m%Y%H%M%S" -s "$dateFromServer"'
+  ignore_errors: yes

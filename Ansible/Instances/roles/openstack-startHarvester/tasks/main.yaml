@@ -1,0 +1,22 @@
+#This file is developed by Team 52 of COMP90024 of The University of Melbourne.
+#Researched cities : All the cities in Melbourne region
+#Team member - id
+#Nitish Mathur  				954892     
+#Yash Shinde     				920691
+#Nakia Silva  					796504
+#Shreyas Walvekar    				961621
+#Krishna Srinivas Sundararajan  		977863
+
+# Download files from GitHub
+- name: Create repository for harvester
+  file:
+     mode: "0777"
+     recurse: yes
+     path:  "/mnt/storage/project/"
+     state: directory
+
+- name: Extracting twitter harvester
+  command: git clone https://github.com/knightmatish/CC_assignment_2.git /mnt/storage/project/
+
+# The following line will start the Harvester
+- command: 'python3 /mnt/storage/project/Harvester/twitterHandler.py' 

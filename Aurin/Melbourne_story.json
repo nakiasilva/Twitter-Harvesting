@@ -1,0 +1,64 @@
+{
+	"combined" : {
+		"data_a" : [34139, 35778, 36293, 38183, 41986],
+		"data_b" : [171088, 174383, 174966, 184008, 207936],
+		"data_c" : [12946, 14306, 15791, 18045, 18541],
+		"data_d" : [20605, 22985, 21952, 21720, 20457],
+		"data_e" : [15686, 18944, 27728, 32421, 38567],
+		"data_f" : [1206, 1114, 1254, 821, 949],
+		"years" : [2012, 2013, 2014, 2015, 2016],
+		"population" : [3345678, 3414103, 3486320, 3554728, 3626955]
+	},
+	"docs":[
+		{
+			"a_total": 34139,
+			"b_total": 171088,
+			"c_total": 12946,
+			"d_total": 20605,
+			"e_total": 15686,
+			"f_total": 1206,
+			"estimated_population": 3345678,
+			"ref_period": 2012
+		},
+		{
+			"a_total": 35778,
+			"b_total": 174383,
+			"c_total": 14306,
+			"d_total": 22985,
+			"e_total": 18944,
+			"f_total": 1114,
+			"estimated_population": 3414103,
+			"ref_period": 2013
+		},
+		{
+			"a_total": 36293,
+			"b_total": 174966,
+			"c_total": 15791,
+			"d_total": 21952,
+			"e_total": 27728,
+			"f_total": 1254,
+			"estimated_population": 3486320,
+			"ref_period": 2014
+		},
+		{
+			"a_total": 38183,
+			"b_total": 184008,
+			"c_total": 18045,
+			"d_total": 21720,
+			"e_total": 32421,
+			"f_total": 821,
+			"estimated_population": 3554728,
+			"ref_period": 2015
+		},
+		{
+			"a_total": 41986,
+			"b_total": 207936,
+			"c_total": 18541,
+			"d_total": 20457,
+			"e_total": 38567,
+			"f_total": 949,
+			"estimated_population": 3626955,
+			"ref_period": 2016
+		},
+	]
+}

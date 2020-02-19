@@ -1,0 +1,20 @@
+#This file is developed by Team 52 of COMP90024 of The University of Melbourne.
+#Researched cities : All the cities in Melbourne region
+#Team member - id
+#Nitish Mathur  				            954892     
+#Yash Shinde     				            920691
+#Nakia Silva  					            796504
+#Shreyas Walvekar    				        961621
+#Krishna Srinivas Sundararajan  		977863
+
+# This will configure proxy setting and mount the volumes
+- hosts: all_servers_common
+  user: ec2-user
+  sudo: yes
+  vars_files:
+    - host_vars/new_nectar.yaml
+  vars:
+    ansible_ssh_private_key_file: "{{ key1 }}"
+  roles:
+    - role: openstack-mountvolume
+    - role: openstack-common

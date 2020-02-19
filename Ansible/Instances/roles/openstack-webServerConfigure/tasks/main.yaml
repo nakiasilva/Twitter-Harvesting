@@ -1,0 +1,28 @@
+#This file is developed by Team 52 of COMP90024 of The University of Melbourne.
+#Researched cities : All the cities in Melbourne region
+#Team member - id
+#Nitish Mathur  				954892     
+#Yash Shinde     				920691
+#Nakia Silva  					796504
+#Shreyas Walvekar    				961621
+#Krishna Srinivas Sundararajan  		977863
+
+# Configure packages
+- name: upgrade all packages
+  yum: name=* state=latest
+
+- name: Install a list of packages
+  yum:
+    name:
+      - "{{ item }}"
+    state: latest
+    update_cache: yes
+  with_items:
+    - httpd
+    - php
+
+- command: "{{ item }}"
+  with_items:
+    - systemctl start httpd.service
+    - systemctl restart httpd.service
+    - systemctl enable httpd.service

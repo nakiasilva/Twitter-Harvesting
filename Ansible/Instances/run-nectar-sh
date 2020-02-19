@@ -1,0 +1,3 @@
+#!/bin/bash
+
+. ./unimelb-comp90024-group-52-openrc.sh; ansible-playbook --ask-become-pass nectar.yaml -i hosts.ini

@@ -1,0 +1,42 @@
+#This file is developed by Team 52 of COMP90024 of The University of Melbourne.
+#Researched cities : All the cities in Melbourne region
+#Team member - id
+#Nitish Mathur  				            954892     
+#Yash Shinde     				            920691
+#Nakia Silva  					            796504
+#Shreyas Walvekar    				        961621
+#Krishna Srinivas Sundararajan  		977863
+
+# This will update the packages and install required files
+- hosts: all_servers_common
+  user: ec2-user
+  sudo: yes
+  vars_files:
+    - host_vars/new_nectar.yaml
+  vars:
+    ansible_ssh_private_key_file: "{{ key1 }}"
+  roles:
+    - role: openstack-packageConfigure
+
+- hosts: couch_cluster_node
+  user: ec2-user
+  sudo: yes
+  vars_files:
+    - host_vars/new_nectar.yaml
+  vars:
+    ansible_ssh_private_key_file: "{{ key1 }}"
+    server_password: "password"
+  roles:
+    - role: openstack-startHarvester
+    - role: openstack-configureCluster
+
+- hosts: web_server
+  user: ec2-user
+  sudo: yes
+  vars_files:
+    - host_vars/new_nectar.yaml
+  vars:
+    ansible_ssh_private_key_file: "{{ key1 }}"
+    server_password: "password"
+  roles:
+    - role: openstack-webServerConfigure

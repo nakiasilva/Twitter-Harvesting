@@ -1,0 +1,52 @@
+#This file is developed by Team 52 of COMP90024 of The University of Melbourne.
+#Researched cities : All the cities in Melbourne region
+#Team member - id
+#Nitish Mathur  				954892     
+#Yash Shinde     				920691
+#Nakia Silva  					796504
+#Shreyas Walvekar    				961621
+#Krishna Srinivas Sundararajan  		977863
+
+# Common vars
+availability_zone: melbourne-qh2-uom
+
+ansible_ssh_private_key_file: ./sins101.pem
+# Volume
+volumes:
+  - vol_name: deadlySins_M
+    vol_size: 100
+  - vol_name: deadlySins_S1
+    vol_size: 50
+  - vol_name: deadlySins_S2
+    vol_size: 50
+  - vol_name: deadlySins_S3
+    vol_size: 50
+
+# Security group
+security_groups:
+  - name: deadlySins_SG_all
+    description: "Security group for everything"
+    protocol: tcp
+    port_range_min: 22
+    port_range_max: 8080
+    remote_ip_prefix: 0.0.0.0/0
+    
+
+# Instance
+instances:
+  - instance_name: deadlySins_M
+    instance_image: 156f4c28-d42d-45a7-8625-616ce5b91392
+    instance_key_name: sins101
+    instance_flavor: uom.mse.2c9g
+  - instance_name: deadlySins_S1
+    instance_image: 156f4c28-d42d-45a7-8625-616ce5b91392
+    instance_key_name: sins101
+    instance_flavor: uom.mse.2c9g
+  - instance_name: deadlySins_S2
+    instance_image: 156f4c28-d42d-45a7-8625-616ce5b91392
+    instance_key_name: sins101
+    instance_flavor: uom.mse.2c9g
+  - instance_name: deadlySins_S3
+    instance_image: 156f4c28-d42d-45a7-8625-616ce5b91392
+    instance_key_name: sins101
+    instance_flavor: uom.mse.2c9g
